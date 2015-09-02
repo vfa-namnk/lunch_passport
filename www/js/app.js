@@ -18,51 +18,16 @@ var currentShopId; //現在詳細ページを表示するお店
 function onRegisterBtn()
 {
     //STEP1 コード追加（register）
-    var username = $("#reg_username").val();
-    var password = $("#reg_password").val();
-
-    var user = new NCMB.User();
-    user.set("userName", username);
-    user.set("password", password);
-
-    // 任意フィールドに値を追加 
-    user.signUp(null, {
-        success: function(user) {
-            alert("新規登録に成功");
-            currentLoginUser = NCMB.User.current();
-            $.mobile.changePage('#MapPage');
-        },
-        error: function(user, error) {
-            alert("新規登録に失敗！次のエラー発生： " + error.message);
-        }
-    });    
 }
 
 function onLoginBtn()
 {
     //STEP1 コード追加（login）
-    var username = $("#login_username").val();
-    var password = $("#login_password").val();
-    // ユーザー名とパスワードでログイン
-    NCMB.User.logIn(username, password, {
-        success: function(user) {
-            alert("ログイン成功");
-            currentLoginUser = NCMB.User.current();
-            $.mobile.changePage('#MapPage');
-        },
-        error: function(user, error) {
-            alert("ログイン失敗！次のエラー発生: " + error.message);
-        }
-    });    
 }
 
 function onLogoutBtn()
 {
     //STEP1 コード追加(logout)
-    NCMB.User.logOut();
-    alert('ログアウト成功');
-    currentLoginUser = null;
-    $.mobile.changePage('#LoginPage');    
 }
 
 //---------------------------------地図でお店表示---------------------------//

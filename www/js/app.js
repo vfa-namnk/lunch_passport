@@ -113,9 +113,10 @@ function getShopDetail(shopId) {
             $("#shopName").text(shop.get("name"));
             $("#shopCapacity").text("スペース：" + shop.get("capacity") + "席");
             $("#shopImage").attr("src" , "https://mb.api.cloud.nifty.com/2013-09-01/applications/" + applicationID + "/publicFiles/" + shop.get("image"));
-        　　  var UseClass = NCMB.Object.extend("Used");
+            var UseClass = NCMB.Object.extend("Used");
             var query = new NCMB.Query(UseClass);
             query.equalTo("shop", shop);
+            query.equalTo("user", currentLoginUser);
             query.count({
               success: function(count) {
                   if(count>0) {

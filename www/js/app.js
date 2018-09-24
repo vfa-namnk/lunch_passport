@@ -18,16 +18,50 @@ var currentShopId; //現在詳細ページを表示するお店
 function onRegisterBtn()
 {
     //STEP1 コード追加（register）
+    //入力フォームからusername, password変数にセット
+    var username = $("#reg_username").val();
+    var password = $("#reg_password").val();
+    
+    var user = new ncmb.User();
+    user.set("userName", username)
+        .set("password", password);
+    
+    // 任意フィールドに値を追加 
+    user.signUpByAccount()
+        .then(function(user) {
+            alert("新規登録に成功");
+            currentLoginUser = ncmb.User.getCurrentUser();
+            $.mobile.changePage('#MapPage');
+        })
+        .catch(function(error) {
+            alert("新規登録に失敗！次のエラー発生：" + error);
+        }); 
 }
 
 function onLoginBtn()
 {
     //STEP1 コード追加（login）
+    var username = $("#login_username").val();
+    var password = $("#login_password").val();
+    // ユーザー名とパスワードでログイン
+    ncmb.User.login(username, password)
+        .then(function(user) {
+            alert("ログイン成功");
+            currentLoginUser = ncmb.User.getCurrentUser();
+            $.mobile.changePage('#MapPage');
+        })
+        .catch(function(error) {
+            alert("ログイン失敗！次のエラー発生: " + error);
+        }); 
 }
 
 function onLogoutBtn()
 {
     //STEP1 コード追加(logout)
+    ncmb.User.logout();
+    alert('ログアウト成功');
+    currentLoginUser = null;
+    $.mobile.changePage('#LoginPage');
 }
 
 //---------------------------------地図でお店表示---------------------------//
@@ -109,7 +143,7 @@ function getShopDetail(shopId) {
         .then(function(shop) {
             $("#shopName").text(shop.get("name"));
             $("#shopCapacity").text("スペース：" + shop.get("capacity") + "席");
-            $("#shopImage").attr("src" , "https://mb.api.cloud.nifty.com/2013-09-01/applications/" + applicationID + "/publicFiles/" + shop.get("image"));
+            $("#shopImage").attr("src" , "https://mbaas.api.nifcloud.com/2013-09-01/applications/" + applicationID + "/publicFiles/" + shop.get("image"));
             var UseClass = ncmb.DataStore("Used");
             UseClass
                     .equalTo("shop", shopId)

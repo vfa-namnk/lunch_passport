@@ -1,14 +1,23 @@
 {
     "plugins": [
-        "mobi.monaca.plugins.Monaca",
-        "org.apache.cordova.splashscreen",
-        "mobi.monaca.plugins.MonacaBackend"
+        "mobi.monaca.plugins.Monaca@3.1.0",
+        "mobi.monaca.plugins.MonacaBackend@1.3.0",
+        "cordova-custom-config@2.0.3"
     ],
     "framework_version": "3.5",
-    "xcode_version": "6",
-    "cordova_version": "4.1",
-    "plugin_settings": [],
-    "external_plugins": [],
+    "xcode_version": "8",
+    "cordova_version": "6.5",
+    "plugin_settings": {
+        "ncmb-push-monaca-plugin": {
+            "variables": []
+        }
+    },
+    "external_plugins": [
+        "cordova-plugin-splashscreen@4.0.3",
+        "cordova-plugin-whitelist@1.3.1",
+        "ncmb-push-monaca-plugin@3.0.0",
+        "cordova-plugin-geolocation@2.4.3"
+    ],
     "title-ja": "",
     "title-en": "",
     "description-ja": "",
